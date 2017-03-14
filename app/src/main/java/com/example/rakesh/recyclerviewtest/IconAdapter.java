@@ -1,6 +1,8 @@
 package com.example.rakesh.recyclerviewtest;
 
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,40 +20,8 @@ public class IconAdapter extends RecyclerView.Adapter<IconAdapter.ViewHolder> {
 
     private List<Icon> icons;
 
-    private int selectedPosition = 0;
-
     public IconAdapter() {
         this.icons = new ArrayList<>();
-        icons.add(new Icon(R.drawable.icon_amazon, "Amazon"));
-        icons.add(new Icon(R.drawable.icon_amazon_kindle, "Amazon Kindle"));
-        icons.add(new Icon(R.drawable.icon_downie, "Downie"));
-        icons.add(new Icon(R.drawable.icon_fez, "Fez"));
-        icons.add(new Icon(R.drawable.icon_filehippo, "FileHippo"));
-        icons.add(new Icon(R.drawable.icon_firefox_beta, "FireFox beta"));
-        icons.add(new Icon(R.drawable.icon_google_inbox, "Inbox"));
-        icons.add(new Icon(R.drawable.icon_ibook, "IBook"));
-        icons.add(new Icon(R.drawable.icon_lego, "Lego"));
-        icons.add(new Icon(R.drawable.icon_lossless, "Lossless"));
-        icons.add(new Icon(R.drawable.icon_microphone, "Microphone"));
-        icons.add(new Icon(R.drawable.icon_musicbrainz, "Music Brainz"));
-        icons.add(new Icon(R.drawable.icon_nba, "NBA"));
-        icons.add(new Icon(R.drawable.icon_panorama, "Panorama"));
-        icons.add(new Icon(R.drawable.icon_snake, "Snake"));
-        icons.add(new Icon(R.drawable.icon_amazon, "Amazon"));
-        icons.add(new Icon(R.drawable.icon_amazon_kindle, "Amazon Kindle"));
-        icons.add(new Icon(R.drawable.icon_downie, "Downie"));
-        icons.add(new Icon(R.drawable.icon_fez, "Fez"));
-        icons.add(new Icon(R.drawable.icon_filehippo, "FileHippo"));
-        icons.add(new Icon(R.drawable.icon_firefox_beta, "FireFox beta"));
-        icons.add(new Icon(R.drawable.icon_google_inbox, "Inbox"));
-        icons.add(new Icon(R.drawable.icon_ibook, "IBook"));
-        icons.add(new Icon(R.drawable.icon_lego, "Lego"));
-        icons.add(new Icon(R.drawable.icon_lossless, "Lossless"));
-        icons.add(new Icon(R.drawable.icon_microphone, "Microphone"));
-        icons.add(new Icon(R.drawable.icon_musicbrainz, "Music Brainz"));
-        icons.add(new Icon(R.drawable.icon_nba, "NBA"));
-        icons.add(new Icon(R.drawable.icon_panorama, "Panorama"));
-        icons.add(new Icon(R.drawable.icon_snake, "Snake"));
         icons.add(new Icon(R.drawable.icon_amazon, "Amazon"));
         icons.add(new Icon(R.drawable.icon_amazon_kindle, "Amazon Kindle"));
         icons.add(new Icon(R.drawable.icon_downie, "Downie"));
@@ -83,10 +53,40 @@ public class IconAdapter extends RecyclerView.Adapter<IconAdapter.ViewHolder> {
 
 
     }
-
     @Override
     public int getItemCount() {
         return icons.size();
+    }
+
+    public void loadMore() {
+
+        Log.i("LoadMore", "Inside Loadmore");
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                icons.add(new Icon(R.drawable.icon_amazon, "Amazon"));
+                icons.add(new Icon(R.drawable.icon_amazon_kindle, "Amazon Kindle"));
+                icons.add(new Icon(R.drawable.icon_downie, "Downie"));
+                icons.add(new Icon(R.drawable.icon_fez, "Fez"));
+                icons.add(new Icon(R.drawable.icon_filehippo, "FileHippo"));
+                icons.add(new Icon(R.drawable.icon_firefox_beta, "FireFox beta"));
+                icons.add(new Icon(R.drawable.icon_google_inbox, "Inbox"));
+                icons.add(new Icon(R.drawable.icon_ibook, "IBook"));
+                icons.add(new Icon(R.drawable.icon_lego, "Lego"));
+                icons.add(new Icon(R.drawable.icon_lossless, "Lossless"));
+                icons.add(new Icon(R.drawable.icon_microphone, "Microphone"));
+                icons.add(new Icon(R.drawable.icon_musicbrainz, "Music Brainz"));
+                icons.add(new Icon(R.drawable.icon_nba, "NBA"));
+                icons.add(new Icon(R.drawable.icon_panorama, "Panorama"));
+                icons.add(new Icon(R.drawable.icon_snake, "Snake"));
+                Log.i("LoadMore", "Loading more in adapter");
+                notifyDataSetChanged();
+            }
+        };
+
+        handler.postDelayed(runnable,1000);
     }
 
 
